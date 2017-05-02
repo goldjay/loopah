@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Loopah" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZGl-OB-QW2" customClass="AudioButton" customModule="Loopah" customModuleProvider="target">
+                                <color key="backgroundColor" red="0.2678222656" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="cMa-8m-W60"/>
+                                    <constraint firstAttribute="height" constant="150" id="oI8-C5-biu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <state key="normal" title="1">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Si-IU-68l" customClass="AudioButton" customModule="Loopah" customModuleProvider="target">
+                                <color key="backgroundColor" red="0.2678222656" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="Fdf-Lp-udd"/>
+                                    <constraint firstAttribute="width" constant="150" id="J17-qv-W1I"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <state key="normal" title="2">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="noY-Dp-cu3" customClass="AudioButton" customModule="Loopah" customModuleProvider="target">
+                                <color key="backgroundColor" red="0.2678222656" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="67x-Bw-FRd"/>
+                                    <constraint firstAttribute="height" constant="150" id="PJx-IN-2SY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <state key="normal" title="3">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Nj-VE-1rT" customClass="AudioButton" customModule="Loopah" customModuleProvider="target">
+                                <color key="backgroundColor" red="0.2678222656" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="73t-S1-O9X"/>
+                                    <constraint firstAttribute="height" constant="150" id="Aj5-s5-HAt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <state key="normal" title="4">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKX-6p-KKV">
+                                <frame key="frameInset" minX="169" minY="73" width="36" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="PLAY"/>
+                                <connections>
+                                    <action selector="playFile:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZQD-k3-kcE"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="noY-Dp-cu3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="A90-NG-17c"/>
+                            <constraint firstItem="ZGl-OB-QW2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="BLi-pC-zvE"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="noY-Dp-cu3" secondAttribute="bottom" constant="169" id="HQs-uJ-TXJ"/>
+                            <constraint firstItem="noY-Dp-cu3" firstAttribute="top" secondItem="ZGl-OB-QW2" secondAttribute="bottom" constant="25" id="Izy-AF-M72"/>
+                            <constraint firstItem="3Nj-VE-1rT" firstAttribute="top" secondItem="0Si-IU-68l" secondAttribute="bottom" constant="25" id="QaW-Ip-p9N"/>
+                            <constraint firstItem="0Si-IU-68l" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="153" id="WnK-ix-Ptf"/>
+                            <constraint firstItem="3Nj-VE-1rT" firstAttribute="leading" secondItem="noY-Dp-cu3" secondAttribute="trailing" constant="43" id="bBR-aV-AR1"/>
+                            <constraint firstItem="0Si-IU-68l" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="kAQ-K3-uLC"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3Nj-VE-1rT" secondAttribute="bottom" constant="169" id="mXF-m9-jWs"/>
+                            <constraint firstItem="0Si-IU-68l" firstAttribute="leading" secondItem="ZGl-OB-QW2" secondAttribute="trailing" constant="43" id="nRw-Q1-yYo"/>
+                            <constraint firstItem="ZGl-OB-QW2" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="153" id="oWJ-oY-K8A"/>
+                            <constraint firstItem="3Nj-VE-1rT" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="qfw-D4-hYU"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="121.88905547226388"/>
+        </scene>
+    </scenes>
+</document>

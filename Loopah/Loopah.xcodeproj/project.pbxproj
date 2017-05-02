@@ -9,19 +9,21 @@
 /* Begin PBXBuildFile section */
 		597C31161EB7A19700777D1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597C31151EB7A19700777D1D /* AppDelegate.swift */; };
 		597C31181EB7A19700777D1D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597C31171EB7A19700777D1D /* ViewController.swift */; };
-		597C311B1EB7A19700777D1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 597C31191EB7A19700777D1D /* Main.storyboard */; };
+		597C311B1EB7A19700777D1D /* Loopah.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 597C31191EB7A19700777D1D /* Loopah.storyboard */; };
 		597C311D1EB7A19700777D1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 597C311C1EB7A19700777D1D /* Assets.xcassets */; };
 		597C31201EB7A19700777D1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 597C311E1EB7A19700777D1D /* LaunchScreen.storyboard */; };
+		597C312A1EB7A9F200777D1D /* AudioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597C31291EB7A9F200777D1D /* AudioButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		597C31121EB7A19700777D1D /* Loopah.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Loopah.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		597C31151EB7A19700777D1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		597C31171EB7A19700777D1D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		597C311A1EB7A19700777D1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		597C311A1EB7A19700777D1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Loopah.storyboard; sourceTree = "<group>"; };
 		597C311C1EB7A19700777D1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		597C311F1EB7A19700777D1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		597C31211EB7A19700777D1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		597C31291EB7A9F200777D1D /* AudioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +58,8 @@
 			children = (
 				597C31151EB7A19700777D1D /* AppDelegate.swift */,
 				597C31171EB7A19700777D1D /* ViewController.swift */,
-				597C31191EB7A19700777D1D /* Main.storyboard */,
+				597C31291EB7A9F200777D1D /* AudioButton.swift */,
+				597C31191EB7A19700777D1D /* Loopah.storyboard */,
 				597C311C1EB7A19700777D1D /* Assets.xcassets */,
 				597C311E1EB7A19700777D1D /* LaunchScreen.storyboard */,
 				597C31211EB7A19700777D1D /* Info.plist */,
@@ -126,7 +129,7 @@
 			files = (
 				597C31201EB7A19700777D1D /* LaunchScreen.storyboard in Resources */,
 				597C311D1EB7A19700777D1D /* Assets.xcassets in Resources */,
-				597C311B1EB7A19700777D1D /* Main.storyboard in Resources */,
+				597C311B1EB7A19700777D1D /* Loopah.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,18 +142,19 @@
 			files = (
 				597C31181EB7A19700777D1D /* ViewController.swift in Sources */,
 				597C31161EB7A19700777D1D /* AppDelegate.swift in Sources */,
+				597C312A1EB7A9F200777D1D /* AudioButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		597C31191EB7A19700777D1D /* Main.storyboard */ = {
+		597C31191EB7A19700777D1D /* Loopah.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				597C311A1EB7A19700777D1D /* Base */,
 			);
-			name = Main.storyboard;
+			name = Loopah.storyboard;
 			sourceTree = "<group>";
 		};
 		597C311E1EB7A19700777D1D /* LaunchScreen.storyboard */ = {
