@@ -18,12 +18,63 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     var audioRecorder: AVAudioRecorder!
     var audioPlayer: AVAudioPlayer!
     
-    var audioFileName: URL? = nil
-    var playing: Bool = false
-    var currTime: TimeInterval = 0
+    var audioEngine: AVAudioEngine!
+    var avNode: AVAudioPlayerNode!
+    var file: AVAudioFile!
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+
+    var audioFileName: URL? = nil
+    var btnSelected: Bool = false
+    
+    var distorsionVal: Float = 0
+        /*
+     
+        */
+    
+    var pitchVal: Float = 0 {
+        didSet {
+            pitchUnit.pitch = pitchVal
+        }
+    }
+    var reverbVal: Float = 0 {
+        didSet {
+            print("YOU SET THE VAL!")
+            avNode.stop()
+            reverbUnit.wetDryMix = reverbVal
+            print(reverbUnit.wetDryMix)
+            
+            //avNode.scheduleFile(file, at: nil, completionHandler: nil)
+            
+            avNode.scheduleBuffer(buffer, at: nil, options: AVAudioPlayerNodeBufferOptions.loops, completionHandler: nil)
+            // Start the audio engine
+            audioEngine.prepare()
+            do{
+            try audioEngine.start()
+            avNode.play()
+            }catch{
+                print("Couldn't play")
+            }
+        }
+    }
+        
+    
+    
+    let pitchUnit = AVAudioUnitTimePitch()
+    let reverbUnit = AVAudioUnitReverb()
+    let distortionUnit = AVAudioUnitDistortion()
+    
+    var buffer: AVAudioPCMBuffer!
+    
+    
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        
+        let btn = UIButton(frame: CGRect(x: 100, y: 0, width: 50, height: 50))
+        btn.backgroundColor = UIColor.red
+        btn.layer.zPosition = 10
+        btn.addTarget(self, action: #selector(handleSelectButtonPress(sender:)), for: .touchUpInside)
+        addSubview(btn)
         
         // Set gesture recognizers
         
@@ -40,10 +91,9 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         do {
             try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
             try recordingSession.setActive(true)
-            recordingSession.requestRecordPermission() { [unowned self] allowed in
+            recordingSession.requestRecordPermission() { allowed in
                 DispatchQueue.main.async {
                     if allowed {
-                        //self.loadRecordingUI()
                         print("ALLOWED")
                     } else {
                         // failed to record!
@@ -57,24 +107,20 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         }
     }
     
-    func loadRecordingUI() {
-        let recordButton = self
-        recordButton.translatesAutoresizingMaskIntoConstraints = false
-        recordButton.setTitle("Tap to Record", for: .normal)
-        recordButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.title1)
-        /*
-        recordButton.addTarget(self, action: #selector(recordTapped), for: .touchUpInside)
-        stackView.addArrangedSubview(recordButton)
+    func handleSelectButtonPress(sender: UIButton!) {
+        print("HIT THE MENU BUTTON")
         
-        playButton = UIButton()
-        playButton.translatesAutoresizingMaskIntoConstraints = false
-        playButton.setTitle("Tap to Play", for: .normal)
-        playButton.isHidden = true
-        playButton.alpha = 0
-        playButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.title1)
-        playButton.addTarget(self, action: #selector(playTapped), for: .touchUpInside)
-        stackView.addArrangedSubview(playButton)
-        */
+        if (self.layer.borderWidth == 5){
+                self.layer.borderWidth = 0
+                btnSelected = false
+        }else {
+            self.layer.borderWidth = 5
+            btnSelected = true
+        }
+        
+        
+
+        
     }
     
     func startRecording() {
@@ -111,12 +157,17 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         audioRecorder.stop()
         audioRecorder = nil
         
+        avNode = AVAudioPlayerNode()
+        audioEngine = AVAudioEngine()
+        
         if success {
             //recordButton.setTitle("Tap to Re-record", for: .normal)
             
             //let path = Bundle.main.path(forResource: "recording1", ofType: "m4a")
             do {
+                playAudioEngine()
                 
+                /*
                 playing = true
                 audioPlayer = try AVAudioPlayer(contentsOf: audioFileName!)
                 audioPlayer.delegate = self
@@ -124,6 +175,8 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
                 
                 audioPlayer.numberOfLoops = -1
                 audioPlayer.play()
+ 
+            */
                 
             } catch {
                 print(error)
@@ -137,6 +190,54 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         }
     }
     
+    func playAudioEngine() {
+        do{
+            file = try AVAudioFile(forReading: audioFileName!)
+            buffer = AVAudioPCMBuffer(pcmFormat: file.processingFormat, frameCapacity: AVAudioFrameCount(file.length))
+            try file.read(into: buffer)
+            
+            // This is a reverb with a cathedral preset. It's nice and ethereal
+            // You're also setting the wetDryMix which controls the mix between the effect and the
+            // original sound.
+            
+            reverbUnit.loadFactoryPreset(AVAudioUnitReverbPreset.cathedral)
+            reverbUnit.wetDryMix = 0
+            
+            // This is a distortion with a radio tower preset which works well for speech
+            // As distortion tends to be quite loud you're setting the wetDryMix to only 25
+            
+            distortionUnit.loadFactoryPreset(AVAudioUnitDistortionPreset.speechCosmicInterference)
+            distortionUnit.wetDryMix = 50
+            
+            pitchUnit.pitch = 2400
+            pitchUnit.rate = 32
+            
+            // Attach the four nodes to the audio engine
+            audioEngine.attach(avNode)
+            audioEngine.attach(reverbUnit)
+            audioEngine.attach(distortionUnit)
+            audioEngine.attach(pitchUnit)
+            
+            // Connect playerA to the reverb
+            audioEngine.connect(avNode, to: reverbUnit, format: buffer.format)
+            // Connect the reverb to the mixer
+            audioEngine.connect(reverbUnit, to: audioEngine.mainMixerNode, format: buffer.format)
+            // Connect the distortion to the mixer
+            audioEngine.connect(distortionUnit, to: audioEngine.mainMixerNode, format: buffer.format)
+            // Connect the pitch to the mixer
+            audioEngine.connect(pitchUnit, to: audioEngine.mainMixerNode, format: buffer.format)
+            
+            // Schedule sound to play on buffer in a loop
+            avNode.scheduleBuffer(buffer, at: nil, options: AVAudioPlayerNodeBufferOptions.loops, completionHandler: nil)
+            // Start the audio engine
+            audioEngine.prepare()
+            try audioEngine.start()
+            avNode.play()
+        } catch {
+            print("Playing didn't work")
+        }
+        
+    }
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if !flag {
             finishRecording(success: false)
@@ -147,17 +248,19 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     }
     
     func handleTap(sender: UITapGestureRecognizer) {
+        print("TAPPED!")
         
-        if playing == true {
-            currTime = audioPlayer.currentTime
-            audioPlayer.pause()
-            playing = false
-        } else {
+        if avNode.isPlaying {
+            avNode.pause()
             
-            audioPlayer.prepareToPlay()
-            audioPlayer.numberOfLoops = -1
-            audioPlayer.play()
-            playing = true
+        } else {
+            // If there is a file, play
+            if((audioFileName) != nil){
+            avNode.play()
+            //audioPlayer.numberOfLoops = -1
+            //audioPlayer.play()
+            
+            }
         }
     }
     

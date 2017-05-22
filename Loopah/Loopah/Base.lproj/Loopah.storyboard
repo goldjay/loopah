@@ -22,8 +22,8 @@
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZGl-OB-QW2" customClass="AudioButton" customModule="Loopah" customModuleProvider="target">
                                 <color key="backgroundColor" red="0.2678222656" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="cMa-8m-W60"/>
-                                    <constraint firstAttribute="height" constant="150" id="oI8-C5-biu"/>
+                                    <constraint firstAttribute="width" constant="150" id="Sdj-pV-eKF"/>
+                                    <constraint firstAttribute="height" constant="150" id="TPL-mR-PXv"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <state key="normal" title="1">
@@ -33,8 +33,8 @@
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Si-IU-68l" customClass="AudioButton" customModule="Loopah" customModuleProvider="target">
                                 <color key="backgroundColor" red="0.2678222656" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="Fdf-Lp-udd"/>
-                                    <constraint firstAttribute="width" constant="150" id="J17-qv-W1I"/>
+                                    <constraint firstAttribute="width" constant="150" id="Vdc-6j-bce"/>
+                                    <constraint firstAttribute="height" constant="150" id="xyN-vG-ImI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <state key="normal" title="2">
@@ -44,8 +44,8 @@
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="noY-Dp-cu3" customClass="AudioButton" customModule="Loopah" customModuleProvider="target">
                                 <color key="backgroundColor" red="0.2678222656" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="67x-Bw-FRd"/>
-                                    <constraint firstAttribute="height" constant="150" id="PJx-IN-2SY"/>
+                                    <constraint firstAttribute="width" constant="150" id="NEt-Rg-1JY"/>
+                                    <constraint firstAttribute="height" constant="150" id="uNJ-Wx-b00"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <state key="normal" title="3">
@@ -55,8 +55,8 @@
                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Nj-VE-1rT" customClass="AudioButton" customModule="Loopah" customModuleProvider="target">
                                 <color key="backgroundColor" red="0.2678222656" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="73t-S1-O9X"/>
-                                    <constraint firstAttribute="height" constant="150" id="Aj5-s5-HAt"/>
+                                    <constraint firstAttribute="width" constant="150" id="GWw-ko-XVu"/>
+                                    <constraint firstAttribute="height" constant="150" id="xrP-Fb-IM9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <state key="normal" title="4">
@@ -71,21 +71,32 @@
                                     <action selector="playFile:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZQD-k3-kcE"/>
                                 </connections>
                             </button>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="-2400" maxValue="2400" translatesAutoresizingMaskIntoConstraints="NO" id="g9v-ni-Zfl">
+                                <frame key="frameInset" minX="167" minY="547" width="194" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="sliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Lwb-FM-wmu"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="4Om-XJ-oTV">
+                                <frame key="frameInset" minX="167" minY="585" width="194" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="reverbChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="su7-jM-2Lf"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="noY-Dp-cu3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="A90-NG-17c"/>
-                            <constraint firstItem="ZGl-OB-QW2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="BLi-pC-zvE"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="noY-Dp-cu3" secondAttribute="bottom" constant="169" id="HQs-uJ-TXJ"/>
-                            <constraint firstItem="noY-Dp-cu3" firstAttribute="top" secondItem="ZGl-OB-QW2" secondAttribute="bottom" constant="25" id="Izy-AF-M72"/>
-                            <constraint firstItem="3Nj-VE-1rT" firstAttribute="top" secondItem="0Si-IU-68l" secondAttribute="bottom" constant="25" id="QaW-Ip-p9N"/>
-                            <constraint firstItem="0Si-IU-68l" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="153" id="WnK-ix-Ptf"/>
-                            <constraint firstItem="3Nj-VE-1rT" firstAttribute="leading" secondItem="noY-Dp-cu3" secondAttribute="trailing" constant="43" id="bBR-aV-AR1"/>
-                            <constraint firstItem="0Si-IU-68l" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="kAQ-K3-uLC"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3Nj-VE-1rT" secondAttribute="bottom" constant="169" id="mXF-m9-jWs"/>
-                            <constraint firstItem="0Si-IU-68l" firstAttribute="leading" secondItem="ZGl-OB-QW2" secondAttribute="trailing" constant="43" id="nRw-Q1-yYo"/>
-                            <constraint firstItem="ZGl-OB-QW2" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="153" id="oWJ-oY-K8A"/>
-                            <constraint firstItem="3Nj-VE-1rT" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="qfw-D4-hYU"/>
+                            <constraint firstItem="0Si-IU-68l" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="153" id="41H-LB-ds9"/>
+                            <constraint firstItem="ZGl-OB-QW2" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="153" id="5aZ-Lo-tdV"/>
+                            <constraint firstItem="3Nj-VE-1rT" firstAttribute="top" secondItem="0Si-IU-68l" secondAttribute="bottom" constant="25" id="IKB-MK-0Uy"/>
+                            <constraint firstItem="noY-Dp-cu3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="MVA-Le-YrB"/>
+                            <constraint firstItem="ZGl-OB-QW2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="NjE-lP-HWl"/>
+                            <constraint firstItem="noY-Dp-cu3" firstAttribute="top" secondItem="ZGl-OB-QW2" secondAttribute="bottom" constant="25" id="Qmm-Ug-33Q"/>
+                            <constraint firstItem="3Nj-VE-1rT" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="dve-oL-MqP"/>
+                            <constraint firstItem="0Si-IU-68l" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="iOd-iE-Dkt"/>
+                            <constraint firstItem="3Nj-VE-1rT" firstAttribute="top" secondItem="0Si-IU-68l" secondAttribute="bottom" constant="25" id="lkh-e1-LEB"/>
                         </constraints>
                     </view>
                 </viewController>
