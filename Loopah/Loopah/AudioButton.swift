@@ -17,9 +17,11 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
     
-    var audioEngine: AVAudioEngine!
-    var playerA: AVAudioPlayerNode!
-    var file: AVAudioFile!
+    private var audioEngine: AVAudioEngine!
+    private var playerA: AVAudioPlayerNode!
+    private var file: AVAudioFile!
+    
+    var player : AVAudioPlayer?
     
     
     var audioFileName: URL? = nil
@@ -70,7 +72,6 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         recBtn.backgroundColor = UIColor.red
         
         recBtn.layer.cornerRadius = 0.5 * recBtn.bounds.size.width
-        recBtn.layer.borderWidth = 2.0
         recBtn.clipsToBounds = true
         recBtn.layer.masksToBounds = true
         recBtn.layer.zPosition = 10
@@ -79,16 +80,23 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         
         let btn = UIButton(frame: CGRect(x: 100, y: 0, width: 50, height: 50))
         btn.layer.zPosition = 10
+        btn.backgroundColor = UIColor.red
         btn.addTarget(self, action: #selector(handleSelectButtonPress(sender:)), for: .touchUpInside)
         addSubview(btn)
+        
+        // TEST BUTTON
+        let mBtn = UIButton(frame: CGRect(x: 40, y: 40, width: 40, height: 40))
+        mBtn.layer.zPosition = 10
+        mBtn.backgroundColor = UIColor.black
+        mBtn.addTarget(self, action: #selector(playMetroNome), for: .touchUpInside)
+        addSubview(mBtn)
+        
+        
         
         // Set gesture recognizers
         
         let buttonTapped: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         
-        //let pressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handlePress(sender:)))
-        
-        //self.addGestureRecognizer(pressGestureRecognizer)
         self.addGestureRecognizer(buttonTapped)
         
         // Set up Audio Recording
@@ -116,12 +124,12 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     func handleSelectButtonPress(sender: UIButton!) {
         print("HIT THE MENU BUTTON")
         
-        if (self.layer.borderWidth == 5){
-            self.layer.borderWidth = 0
-            btnSelected = false
-        }else {
+        btnSelected = !btnSelected
+        
+        if(btnSelected) {
             self.layer.borderWidth = 5
-            btnSelected = true
+        } else {
+            self.layer.borderWidth = 0
         }
     }
     
@@ -245,34 +253,6 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
             }
         }
     }
-    /*
-     
-     func handlePress(sender: UILongPressGestureRecognizer) {
-     if sender.state == UIGestureRecognizerState.began {
-     // handle start of pressing
-     print("Start press")
-     startRecording()
-     }
-     else if sender.state == UIGestureRecognizerState.ended {
-     // handle end of pressing
-     print("End press")
-     finishRecording(success: true)
-     }
-     }
-     */
-    /*
-     func handleDoubleTap(sender: UITapGestureRecognizer) {
-     print("DOUBLE TAP")
-     if sender.state == .ended {
-     print("UIGestureRecognizerStateEnded")
-     //Do Whatever You want on End of Gesture
-     }
-     else if sender.state == .began {
-     print("UIGestureRecognizerStateBegan.")
-     //Do Whatever You want on Began of Gesture
-     }
-     }
-     */
     
     func startAudioAfterChange() {
         playerA.scheduleBuffer(buffer, at: nil, options: AVAudioPlayerNodeBufferOptions.loops, completionHandler: nil)
@@ -284,5 +264,40 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         }catch{
             print("Couldn't play")
         }
+    }
+    
+    func playMetroNome() {
+        let path = Bundle.main.path(forResource: "metronome", ofType:"wav")!
+        let url = URL(fileURLWithPath: path)
+        
+        do {
+            let sound = try AVAudioPlayer(contentsOf: url)
+            self.player = sound
+            sound.numberOfLoops = 5
+            sound.prepareToPlay()
+            sound.play()
+        } catch {
+            print("error loading file")
+            // couldn't load file :(
+        }
+        
+        /*
+        let path = Bundle.main.path(forResource: "metronome", ofType:"wav")!
+        print(path)
+        
+        let url = URL(fileURLWithPath: path)
+        
+        do {
+            let sound = try AVAudioPlayer(contentsOf: url)
+            audioPlayer = sound
+            sound.play()
+            
+        } catch {
+            print("Couldn't load file!")
+            
+        }
+ */
+      
+        
     }
 }

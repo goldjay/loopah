@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5973E08E1F0DF2A6004E91CA /* Tempo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5973E08D1F0DF2A6004E91CA /* Tempo.swift */; };
+		5973E0921F0E0238004E91CA /* metronome.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5973E0911F0E0238004E91CA /* metronome.wav */; };
 		597C31161EB7A19700777D1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597C31151EB7A19700777D1D /* AppDelegate.swift */; };
 		597C31181EB7A19700777D1D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597C31171EB7A19700777D1D /* ViewController.swift */; };
 		597C311B1EB7A19700777D1D /* Loopah.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 597C31191EB7A19700777D1D /* Loopah.storyboard */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5973E08D1F0DF2A6004E91CA /* Tempo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tempo.swift; sourceTree = "<group>"; };
+		5973E0911F0E0238004E91CA /* metronome.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = metronome.wav; path = ../../../Downloads/metronome.wav; sourceTree = "<group>"; };
 		597C31121EB7A19700777D1D /* Loopah.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Loopah.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		597C31151EB7A19700777D1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		597C31171EB7A19700777D1D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,9 +41,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5973E0901F0E0214004E91CA /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				5973E0911F0E0238004E91CA /* metronome.wav */,
+			);
+			name = sounds;
+			sourceTree = "<group>";
+		};
 		597C31091EB7A19700777D1D = {
 			isa = PBXGroup;
 			children = (
+				5973E0901F0E0214004E91CA /* sounds */,
 				597C31141EB7A19700777D1D /* Loopah */,
 				597C31131EB7A19700777D1D /* Products */,
 			);
@@ -59,6 +72,7 @@
 				597C31151EB7A19700777D1D /* AppDelegate.swift */,
 				597C31171EB7A19700777D1D /* ViewController.swift */,
 				597C31291EB7A9F200777D1D /* AudioButton.swift */,
+				5973E08D1F0DF2A6004E91CA /* Tempo.swift */,
 				597C31191EB7A19700777D1D /* Loopah.storyboard */,
 				597C311C1EB7A19700777D1D /* Assets.xcassets */,
 				597C311E1EB7A19700777D1D /* LaunchScreen.storyboard */,
@@ -130,6 +144,7 @@
 				597C31201EB7A19700777D1D /* LaunchScreen.storyboard in Resources */,
 				597C311D1EB7A19700777D1D /* Assets.xcassets in Resources */,
 				597C311B1EB7A19700777D1D /* Loopah.storyboard in Resources */,
+				5973E0921F0E0238004E91CA /* metronome.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +158,7 @@
 				597C31181EB7A19700777D1D /* ViewController.swift in Sources */,
 				597C31161EB7A19700777D1D /* AppDelegate.swift in Sources */,
 				597C312A1EB7A9F200777D1D /* AudioButton.swift in Sources */,
+				5973E08E1F0DF2A6004E91CA /* Tempo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

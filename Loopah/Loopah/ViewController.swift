@@ -36,7 +36,7 @@ class ViewController: UIViewController {
          }
          self.view.addSubview(button1)
          */
-        
+        /*
         let button2  = playButton!
         button2.shapeColor = UIColor.red
         button2.buttonShape = Shape.Triangle
@@ -46,6 +46,7 @@ class ViewController: UIViewController {
         }
         button2.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
         self.view.addSubview(button2)
+        */
         
         /*
          let button3  = ShapeButton(type:  .custom)
