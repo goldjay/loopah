@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,58 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZGl-OB-QW2" customClass="AudioButton" customModule="Loopah" customModuleProvider="target">
-                                <color key="backgroundColor" red="0.2678222656" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="Sdj-pV-eKF"/>
-                                    <constraint firstAttribute="height" constant="150" id="TPL-mR-PXv"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                <state key="normal" title="1">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Si-IU-68l" customClass="AudioButton" customModule="Loopah" customModuleProvider="target">
-                                <color key="backgroundColor" red="0.2678222656" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="Vdc-6j-bce"/>
-                                    <constraint firstAttribute="height" constant="150" id="xyN-vG-ImI"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                <state key="normal" title="2">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="noY-Dp-cu3" customClass="AudioButton" customModule="Loopah" customModuleProvider="target">
-                                <color key="backgroundColor" red="0.2678222656" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="NEt-Rg-1JY"/>
-                                    <constraint firstAttribute="height" constant="150" id="uNJ-Wx-b00"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                <state key="normal" title="3">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Nj-VE-1rT" customClass="AudioButton" customModule="Loopah" customModuleProvider="target">
-                                <color key="backgroundColor" red="0.2678222656" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="GWw-ko-XVu"/>
-                                    <constraint firstAttribute="height" constant="150" id="xrP-Fb-IM9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                <state key="normal" title="4">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKX-6p-KKV">
-                                <frame key="frameInset" minX="169" minY="73" width="36" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="PLAY"/>
-                                <connections>
-                                    <action selector="playFile:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZQD-k3-kcE"/>
-                                </connections>
-                            </button>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="-2400" maxValue="2400" translatesAutoresizingMaskIntoConstraints="NO" id="g9v-ni-Zfl">
                                 <frame key="frameInset" minX="167" minY="516" width="194" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -129,17 +76,6 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="0Si-IU-68l" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="153" id="41H-LB-ds9"/>
-                            <constraint firstItem="ZGl-OB-QW2" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="153" id="5aZ-Lo-tdV"/>
-                            <constraint firstItem="3Nj-VE-1rT" firstAttribute="top" secondItem="0Si-IU-68l" secondAttribute="bottom" constant="25" id="IKB-MK-0Uy"/>
-                            <constraint firstItem="noY-Dp-cu3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="MVA-Le-YrB"/>
-                            <constraint firstItem="ZGl-OB-QW2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="NjE-lP-HWl"/>
-                            <constraint firstItem="noY-Dp-cu3" firstAttribute="top" secondItem="ZGl-OB-QW2" secondAttribute="bottom" constant="25" id="Qmm-Ug-33Q"/>
-                            <constraint firstItem="3Nj-VE-1rT" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="dve-oL-MqP"/>
-                            <constraint firstItem="0Si-IU-68l" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="iOd-iE-Dkt"/>
-                            <constraint firstItem="3Nj-VE-1rT" firstAttribute="top" secondItem="0Si-IU-68l" secondAttribute="bottom" constant="25" id="lkh-e1-LEB"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

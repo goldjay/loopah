@@ -11,17 +11,21 @@ import AVFoundation
 
 class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     
-    var frameHeight: CGFloat = 150
-    var frameWidth: CGFloat = 150
+    var frameHeight: CGFloat?
+    var frameWidth: CGFloat?
     
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
     
-    private var audioEngine: AVAudioEngine!
-    private var playerA: AVAudioPlayerNode!
-    private var file: AVAudioFile!
+    var audioEngine: AVAudioEngine!
+    var playerA: AVAudioPlayerNode!
+    var file: AVAudioFile!
     
     var player : AVAudioPlayer?
+    
+    var buttonColor: UIColor?
+    var buttonHeight: Int?
+    var buttonWidth: Int?
     
     
     var audioFileName: URL? = nil
@@ -65,10 +69,23 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     
     var buffer: AVAudioPCMBuffer!
     
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
+    required init(dimensions: Int, activeColor: UIColor) {
+        super.init(frame: .zero)
         
-        let recBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        // Create a shape at the position and of the size
+        buttonColor = activeColor
+        
+        
+        
+        
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.setTitleColor(buttonColor, for: .normal)
+        
+        // Create record button
+        let recDim = Int(dimensions/7)
+        
+        let recBtn = UIButton(frame: CGRect(x: 5, y: 5, width: recDim, height: recDim))
         recBtn.backgroundColor = UIColor.red
         
         recBtn.layer.cornerRadius = 0.5 * recBtn.bounds.size.width
@@ -78,18 +95,16 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         recBtn.addTarget(self, action: #selector(startRecording), for: .touchUpInside)
         addSubview(recBtn)
         
-        let btn = UIButton(frame: CGRect(x: 100, y: 0, width: 50, height: 50))
-        btn.layer.zPosition = 10
-        btn.backgroundColor = UIColor.red
-        btn.addTarget(self, action: #selector(handleSelectButtonPress(sender:)), for: .touchUpInside)
-        addSubview(btn)
+        // Create select button
         
-        // TEST BUTTON
-        let mBtn = UIButton(frame: CGRect(x: 40, y: 40, width: 40, height: 40))
-        mBtn.layer.zPosition = 10
-        mBtn.backgroundColor = UIColor.black
-        mBtn.addTarget(self, action: #selector(playMetroNome), for: .touchUpInside)
-        addSubview(mBtn)
+        let selectDim = Int(dimensions/6)
+        
+        let selectBtn = UIButton(frame: CGRect(x: Int(dimensions) - selectDim, y: 0, width: selectDim, height: selectDim))
+        selectBtn.layer.zPosition = 10
+        selectBtn.backgroundColor = UIColor.red
+        selectBtn.addTarget(self, action: #selector(handleSelectButtonPress(sender:)), for: .touchUpInside)
+        addSubview(selectBtn)
+        
         
         
         
@@ -120,6 +135,9 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
             print("FAILED TO RECORD!")
         }
     }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     func handleSelectButtonPress(sender: UIButton!) {
         print("HIT THE MENU BUTTON")
@@ -129,15 +147,14 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         if(btnSelected) {
             self.layer.borderWidth = 5
         } else {
-            self.layer.borderWidth = 0
+            self.layer.borderWidth = 1
         }
     }
     
-    func startRecording() {
-        
+    func startRecording(sender: UIButton) {
         // Check if you are currently recording
         if(audioRecorder != nil && audioRecorder.isRecording) {
-            finishRecording(success: true)
+            finishRecording(sender: sender, success: true)
         } else {
             audioFileName = getDocumentsDirectory().appendingPathComponent("recording\(self.tag).m4a")
             
@@ -157,9 +174,12 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
                 audioRecorder.delegate = self
                 audioRecorder.record()
                 
-                //recordButton.setTitle("Tap to Stop", for: .normal)
+                // Start the button flashing
+                buttonFlash(sender: sender, color: UIColor.white)
+                
+                
             } catch {
-                finishRecording(success: false)
+                finishRecording(sender: sender, success: false)
             }
         }
     }
@@ -170,7 +190,7 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         return documentsDirectory
     }
     
-    func finishRecording(success: Bool) {
+    func finishRecording(sender: UIButton, success: Bool) {
         audioRecorder.stop()
         audioRecorder = nil
         
@@ -178,19 +198,14 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         audioEngine = AVAudioEngine()
         
         if success {
-            //recordButton.setTitle("Tap to Re-record", for: .normal)
-            
-            //let path = Bundle.main.path(forResource: "recording1", ofType: "m4a")
             do {
                 playAudioEngine()
-                
+                print("SUCCESSFUL RECORDING. NOW PLAYING")
+                sender.layer.removeAllAnimations() // Stop button flash
+                sender.backgroundColor = UIColor.red
             }
-            print("ENDED OF ")
-            
         } else {
             print("UNSUCCESSFUL RECORDING")
-            //recordButton.setTitle("Tap to Record", for: .normal)
-            // recording failed :(
         }
     }
     
@@ -228,28 +243,37 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
             // Start the audio engine
             audioEngine.prepare()
             try audioEngine.start()
-            playerA.play()
+            //playerA.play()
+            
         } catch {
             print("Playing didn't work")
         }
         
     }
+    /*
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if !flag {
-            finishRecording(success: false)
+            finishRecording(sendersuccess: false)
             print("DidFinish FALSE")
         } else {
             print("DidFinish TRUE")
         }
     }
+    */
     
     func handleTap(sender: UITapGestureRecognizer) {
-        print("TAPPED!")
-        if(audioFileName != nil){
-            if playerA.isPlaying {
-                playerA.pause()
-            } else {
-                playerA.play()
+        if let button = sender.view as? UIButton {
+            if(audioFileName != nil){
+                if playerA.isPlaying {
+                    playerA.pause()
+                    button.backgroundColor = UIColor.white
+                    button.setTitleColor(self.buttonColor, for: .normal)
+                    
+                } else {
+                    playerA.play()
+                    button.backgroundColor = buttonColor
+                    button.setTitleColor(.white, for: .normal)
+                }
             }
         }
     }
@@ -266,38 +290,11 @@ class AudioButton: UIButton, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         }
     }
     
-    func playMetroNome() {
-        let path = Bundle.main.path(forResource: "metronome", ofType:"wav")!
-        let url = URL(fileURLWithPath: path)
-        
-        do {
-            let sound = try AVAudioPlayer(contentsOf: url)
-            self.player = sound
-            sound.numberOfLoops = 5
-            sound.prepareToPlay()
-            sound.play()
-        } catch {
-            print("error loading file")
-            // couldn't load file :(
-        }
-        
-        /*
-        let path = Bundle.main.path(forResource: "metronome", ofType:"wav")!
-        print(path)
-        
-        let url = URL(fileURLWithPath: path)
-        
-        do {
-            let sound = try AVAudioPlayer(contentsOf: url)
-            audioPlayer = sound
-            sound.play()
-            
-        } catch {
-            print("Couldn't load file!")
-            
-        }
- */
-      
-        
+    func buttonFlash(sender: UIButton, color: UIColor){
+        //Fade in
+        UIView.animate(withDuration: 1.0, delay: 0, options: [.repeat, .autoreverse, .allowUserInteraction], animations: {
+            sender.backgroundColor = color
+            sender.setTitleColor(UIColor.white, for: UIControlState.normal)
+        }, completion: nil)
     }
 }
